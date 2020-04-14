@@ -51,7 +51,7 @@ public class DriftNettyConnectionFactoryConfig
 
     public boolean isConnectionPoolEnabled()
     {
-        return connectionPoolEnabled;
+        return false;
     }
 
     @Config("thrift.client.connection-pool.enabled")

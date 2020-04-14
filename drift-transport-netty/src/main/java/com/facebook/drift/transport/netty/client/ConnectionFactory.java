@@ -33,6 +33,9 @@ import java.net.InetSocketAddress;
 import static com.google.common.primitives.Ints.saturatedCast;
 import static io.netty.channel.ChannelOption.ALLOCATOR;
 import static io.netty.channel.ChannelOption.CONNECT_TIMEOUT_MILLIS;
+import static io.netty.channel.ChannelOption.SO_KEEPALIVE;
+import static io.netty.channel.ChannelOption.SO_REUSEADDR;
+import static io.netty.channel.ChannelOption.TCP_NODELAY;
 import static java.util.Objects.requireNonNull;
 
 class ConnectionFactory
@@ -57,6 +60,9 @@ class ConnectionFactory
                     .group(group)
                     .channel(NioSocketChannel.class)
                     .option(ALLOCATOR, allocator)
+                    .option(TCP_NODELAY, true)
+                    .option(SO_REUSEADDR, true)
+                    .option(SO_KEEPALIVE, true)
                     .option(CONNECT_TIMEOUT_MILLIS, saturatedCast(connectionParameters.getConnectTimeout().toMillis()))
                     .handler(new ThriftClientInitializer(
                             connectionParameters.getTransport(),
