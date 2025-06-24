@@ -46,7 +46,6 @@ public class DriftNettyServerModule
     public void configure(Binder binder)
     {
         configBinder(binder).bindConfig(DriftNettyServerConfig.class);
-        binder.bind(ByteBufAllocator.class).toInstance(allocator);
         binder.bind(ServerTransportFactory.class).to(DriftNettyServerTransportFactory.class).in(Scopes.SINGLETON);
     }
 }

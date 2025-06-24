@@ -62,7 +62,6 @@ public class DriftNettyClientModule
             }
         });
 
-        binder.bind(ByteBufAllocator.class).toInstance(allocator);
         binder.bind(new TypeLiteral<MethodInvokerFactory<Annotation>>() {})
                 .toProvider(MethodInvokerFactoryProvider.class)
                 .in(Scopes.SINGLETON);
@@ -103,7 +102,7 @@ public class DriftNettyClientModule
             factory = new DriftNettyMethodInvokerFactory<>(
                     injector.getInstance(DriftNettyConnectionFactoryConfig.class),
                     annotation -> injector.getInstance(Key.get(DriftNettyClientConfig.class, annotation)),
-                    injector.getInstance(ByteBufAllocator.class));
+                    ByteBufAllocator.DEFAULT);
 
             return factory;
         }

@@ -19,6 +19,7 @@ import com.facebook.drift.transport.server.ServerMethodInvoker;
 import com.facebook.drift.transport.server.ServerTransport;
 import com.facebook.drift.transport.server.ServerTransportFactory;
 import io.netty.buffer.ByteBufAllocator;
+import io.netty.buffer.PooledByteBufAllocator;
 
 import javax.inject.Inject;
 
@@ -30,12 +31,12 @@ public class DriftNettyServerTransportFactory
     private final DriftNettyServerConfig config;
     private final ByteBufAllocator allocator;
 
+    @Inject
     public DriftNettyServerTransportFactory(DriftNettyServerConfig config)
     {
-        this(config, ByteBufAllocator.DEFAULT);
+        this(config, PooledByteBufAllocator.DEFAULT);
     }
 
-    @Inject
     public DriftNettyServerTransportFactory(DriftNettyServerConfig config, ByteBufAllocator allocator)
     {
         this.config = requireNonNull(config, "config is null");
