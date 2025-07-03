@@ -135,7 +135,7 @@ public final class ReloadableSslContext
                 // appropriate handler without having to peek at the content of the connection. If the server doesn't support the legacy transports,
                 // it should respond with a no_application_protocol alert and fail the TLS handshake.
                 sslContextBuilder.applicationProtocolConfig(new ApplicationProtocolConfig(
-                        Protocol.ALPN, SelectorFailureBehavior.FATAL_ALERT, SelectedListenerFailureBehavior.FATAL_ALERT, new String[] {"thrift"}));
+                        Protocol.ALPN, SelectorFailureBehavior.NO_ADVERTISE, SelectedListenerFailureBehavior.ACCEPT, new String[] {"thrift"}));
                 sslContext.set(new SslContextHolder(sslContextBuilder.build()));
             }
         }
